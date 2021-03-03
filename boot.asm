@@ -56,7 +56,6 @@ ees:
         mov ax,bx
 
 call func
-jmp printe
 
 mov bp,100h
 
@@ -68,13 +67,15 @@ jz mloop1
 add bp,32
 cmp bp,300h
 jb mloop  
-jmp myloop
-
+jmp halts
 mloop1:
         add bp,1ah
         es
         mov ax,[bp]
-        add ax,31
+	cs
+	mov bx,[eess]
+        add ax,bx
+        add ax,29
 call func
 
 call vectors
@@ -94,21 +95,8 @@ mov si,0
 mov di,0
 retf
 
-myloop:
-call check
-cmp al,0
-jnz myloop
-
-
-
-
-
-        mov ax,202
+       mov ax,202
 int 19h
-
-check:
-        in al,60h
-        and al,128
         ret
 
 func:
@@ -197,9 +185,9 @@ mov bh,0
 mov bl,1
 mov dl,1
 mov dh,1
-mov cx,512
+mov cx,1536
 mov al,1
 mov ah,13h
 int 10h
-printe2:
-jmp printe2
+halts:
+jmp halts
