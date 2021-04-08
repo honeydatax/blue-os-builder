@@ -95,7 +95,7 @@ namespace FormWithButton
            	ProcessStartInfo psi = new ProcessStartInfo();
 			psi.FileName = "qemu-system-x86_64" ;
 			psi.UseShellExecute = false;
-			psi.Arguments = "-boot "+a +" -fda " +c+ " -m "+b;
+			psi.Arguments = "-boot "+a +" -fda " +c+ " -m "+b +" -serial msmouse";
 			psi.RedirectStandardOutput = true;
 			Process p = Process.Start(psi);
 			p = Process.Start(psi);
